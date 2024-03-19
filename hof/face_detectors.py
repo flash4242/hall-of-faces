@@ -67,11 +67,11 @@ class BaseTensorflowFaceDetector(FaceDetector):
         with self.detection_graph.as_default():
             od_graph_def = tf.compat.v1.GraphDef()
 
-            if not tf.gfile.Exists(self.checkpoint):
+            if not tf.io.gfile.Exists(self.checkpoint):
                 log.info('Checkpoint not found. Triggering download.')
                 self.download_and_extract_model('models/')
 
-            with tf.gfile.GFile(self.checkpoint, 'rb') as fid:
+            with tf.io.gfile.GFile(self.checkpoint, 'rb') as fid:
                 serialized_graph = fid.read()
                 od_graph_def.ParseFromString(serialized_graph)
                 tf.import_graph_def(od_graph_def, name='')
