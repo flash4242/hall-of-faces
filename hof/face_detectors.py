@@ -67,7 +67,7 @@ class BaseTensorflowFaceDetector(FaceDetector):
         with self.detection_graph.as_default():
             od_graph_def = tf.compat.v1.GraphDef()
 
-            if not tf.io.gfile.Exists(self.checkpoint):
+            if not tf.io.gfile.exists(self.checkpoint):
                 log.info('Checkpoint not found. Triggering download.')
                 self.download_and_extract_model('models/')
 
